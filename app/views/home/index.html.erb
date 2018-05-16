@@ -1,0 +1,9 @@
+<div style="text-align:center;">
+  <h1>Middle Kingdom Group Transitions</h1>
+  <h3>Current Groups with Polls</h3>
+  <ul>
+    <% @polls.each do |p| %>
+    <li><%=p.group.name%></li>
+    <% end %>
+  </ul>
+</div>
