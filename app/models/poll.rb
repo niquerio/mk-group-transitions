@@ -1,5 +1,6 @@
 class Poll < ApplicationRecord
   belongs_to :group
+	has_many :tickets
 
   validate :start_date_cannot_be_in_the_past, on: :create
   validate :end_date_cannot_be_before_start_date

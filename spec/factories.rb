@@ -1,4 +1,15 @@
 FactoryBot.define do
+  factory :ticket do
+    letter_of_intent "We intend to rule well."
+    poll
+    after(:build) do |ticket|
+      ticket.portrait.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'images', 'missing.jpg')), filename: 'missing.jpg', content_type: 'image/jpg')
+    end
+  end
+  factory :candidate do
+    sca_name "Lady Ruby"
+    ticket
+  end
   factory :poll, aliases: [:future_poll] do
     group 
     start_date (DateTime.now + 1.days)
