@@ -1,0 +1,8 @@
+<div class="container">
+<%= link_to "<< Poll Home", poll_path(@ticket.poll.id) %>
+<h2><small>Baronial Transition of <%=@ticket.group.name%></small></h2>
+<h1><%=@ticket.candidates.pluck(:sca_name).to_sentence%></h1>
+<h3> Letter of Intent</h3>
+<%= image_tag @ticket.portrait.variant(resize: "400"), class: 'float-right' %>
+<%= simple_format(@ticket.letter_of_intent) %>
+</div>

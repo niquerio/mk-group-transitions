@@ -1,15 +1,16 @@
 <h1>Poll for <%=@poll.group.name%></h1>
 Poll closes: <%= @poll.end_date.strftime('%A, %b %d, %Y @ %l:%M %p') %>
-<% @poll.tickets.each do |ticket| %>
-  <div>
-   <h3><%=ticket.candidates.pluck(:sca_name).to_sentence %></h3> 
-   <%= image_tag ticket.portrait %>
-   <div>
-     <h4>Letter of Intent</h4>
-     <%= ticket.letter_of_intent %>
-   </div>
+<div class="container">
+  <div class="row">
+  <% @poll.tickets.each do |ticket| %>
+    <div class="col text-center">
+     <h3><%=ticket.candidates.pluck(:sca_name).to_sentence %></h3> 
+     <%= image_tag ticket.portrait.variant(resize: "x300") %><br>
+     <%= link_to "Letter of Intent", ticket_path(ticket.id) %>
+    </div>
+  <% end %>
   </div>
-<% end %>
+</div>
 
 To fill out poll
 Enter Member Number
