@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>Poll for <%=@ballot.poll.group.name%></h1>
+  <h3>Resident Member Ballot</h3>
+  <strong>SCA Name: <%=@ballot.sca_name%></strong><br/>
+  <strong>Modern Name: <%=@ballot.modern_name%></strong>
+  <%= bootstrap_form_with url: ballots_path do |f| %>
+    <%= f.hidden_field :member_number, value: @ballot.member_number %>
+    <%= f.hidden_field :sca_name, value: @ballot.sca_name %>
+    <%= f.hidden_field :modern_name, value: @ballot.modern_name %>
+    <%= f.hidden_field :poll_id, value: @ballot.poll.id %>
+    <% i = 0 %>
+    <% @ballot.tickets.each do |ticket| %>
+      <% ticket.candidates.each do |candidate| %>
+          <%= f.hidden_field "scores_attributes[#{i}][candidate_id]", value: candidate.id %> 
+          <% score_group_tag = "scores_attributes[#{i}][value]" %>
+          <%= f.form_group score_group_tag, label: { text: candidate.sca_name } do %>
+            <%= f.radio_button score_group_tag, 1, label: 1, inline: true %>
+            <%= f.radio_button score_group_tag, 2, label: 2, inline: true %>
+            <%= f.radio_button score_group_tag, 3, label: 3, inline: true %>
+            <%= f.radio_button score_group_tag, 4, label: 4, inline: true %>
+            <%= f.radio_button score_group_tag, 5, label: 5, inline: true %>
+            <%= f.radio_button score_group_tag, 0, label: 'Abstain', inline: true %>
+          <% end %>
+        <% i = i + 1 %>
+      <% end %>
+    <% end %>
+    <%= f.text_area :comment %>
+    <%= f.submit "Submit Poll Response" %>
+  <% end %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_18_005520) do
+ActiveRecord::Schema.define(version: 2018_06_05_013333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 2018_05_18_005520) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "ballots", force: :cascade do |t|
+    t.integer "member_number"
+    t.bigint "poll_id"
+    t.string "sca_name"
+    t.string "modern_name"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poll_id"], name: "index_ballots_on_poll_id"
   end
 
   create_table "candidates", force: :cascade do |t|
@@ -74,6 +85,16 @@ ActiveRecord::Schema.define(version: 2018_05_18_005520) do
     t.index ["group_id"], name: "index_polls_on_group_id"
   end
 
+  create_table "scores", force: :cascade do |t|
+    t.bigint "candidate_id"
+    t.bigint "ballot_id"
+    t.integer "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ballot_id"], name: "index_scores_on_ballot_id"
+    t.index ["candidate_id"], name: "index_scores_on_candidate_id"
+  end
+
   create_table "tickets", force: :cascade do |t|
     t.text "letter_of_intent"
     t.bigint "poll_id"
@@ -88,8 +109,11 @@ ActiveRecord::Schema.define(version: 2018_05_18_005520) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "ballots", "polls"
   add_foreign_key "candidates", "tickets"
   add_foreign_key "members", "zipcodes"
   add_foreign_key "polls", "groups"
+  add_foreign_key "scores", "ballots"
+  add_foreign_key "scores", "candidates"
   add_foreign_key "tickets", "polls"
 end

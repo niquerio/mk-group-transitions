@@ -38,5 +38,9 @@ namespace :fake_data do
 
   end
 
+  task :members => :environment do
+    member = Member.create(sca_name: 'Antonio of Cynnabar', modern_name: 'Anthony Smith', number: 12345, zipcode: Group.first.zipcodes.first)
+  end  
+
   task :all => [:db_reset, :zipcode_grps, :poll]    
 end

@@ -1,4 +1,16 @@
 FactoryBot.define do
+  factory :score do
+    candidate
+    ballot
+    value 1
+  end
+  factory :ballot do
+    member_number 111111
+    poll 
+    sca_name "Lord So and So"
+    modern_name "Something Someone"
+    comment "MyText"
+  end
   factory :ticket do
     letter_of_intent "We intend to rule well."
     poll
