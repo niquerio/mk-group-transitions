@@ -13,7 +13,7 @@ Poll closes: <%= @poll.end_date.strftime('%A, %b %d, %Y @ %l:%M %p') %>
   <div class="row justify-content-md-center">
   <div class=col-md-4>
   To fill out poll
-  <%= bootstrap_form_with url: build_ballot_path do |f| %>
+  <%= bootstrap_form_with url: new_ballot_path do |f| %>
     <%= f.text_field :member_number %>
     <%= f.hidden_field :poll_id, :value => @poll.id %>
     <%= f.submit "Get Ballot" %>

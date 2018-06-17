@@ -1,8 +1,8 @@
 class BallotsController < ApplicationController
-  def build
-    @ballot = BallotBuilder.new(member_number: params[:member_number], poll: Poll.find(params[:poll_id]))
-    render 'new.html.erb'
-  end
+	def new
+    b = Ballot.new(member_number: params[:member_number], poll: Poll.find(params[:poll_id]))
+    @ballot = BallotPresenter.new(b)
+	end
   def create
     ballot = Ballot.new(ballot_params) 
     ballot.save

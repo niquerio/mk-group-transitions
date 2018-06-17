@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :tickets, only: [:show]
   
   resources :ballots, only: [:create]
-  post '/ballots/build' => 'ballots#build', as: :build_ballot
+  post '/ballots/new' => 'ballots#new', as: :new_ballot
   
   root to: "home#index" 
 end
