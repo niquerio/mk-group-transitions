@@ -1,9 +1,4 @@
 namespace :fake_data do
-  task :db_reset => :environment do
-    Rake::Task['db:drop'].invoke 
-    Rake::Task['db:create'].invoke 
-    Rake::Task['db:migrate'].invoke 
-  end
   task :zipcode_grps => :environment do
     cynnabar = Group.create(name: 'Barony of Cynnabar')
     brack = Group.create(name: 'Canton of Brackendelve')
@@ -27,6 +22,8 @@ namespace :fake_data do
 
     ticket1 = Ticket.create(poll: poll, letter_of_intent: letter_of_intent)
     ticket1.portrait.attach(io: File.open(Rails.root.join('lib', 'tasks', 'couple1.jpg')), filename: 'couple1.jpg', content_type: 'image/jpg')
+		puts ticket1
+
 
     cand1 = Candidate.create(sca_name: 'Lord Lincoln', ticket: ticket1)
     cand2 = Candidate.create(sca_name: 'Lady Lily', ticket: ticket1)
@@ -42,5 +39,5 @@ namespace :fake_data do
     member = Member.create(sca_name: 'Antonio of Cynnabar', modern_name: 'Anthony Smith', number: 12345, zipcode: Group.first.zipcodes.first)
   end  
 
-  task :all => [:db_reset, :zipcode_grps, :poll]    
+  task :all => ['db:reset', :zipcode_grps, :poll, :members]    
 end
