@@ -41,7 +41,7 @@ FactoryBot.define do
   end
 	factory :group do
 		name :group_name
-	  zipcodes { |a| [a.association(:zipcode)] } 	
+	  #zipcodes { |a| [a.association(:zipcode)] } 	
 	end
 
 	factory :member do

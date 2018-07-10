@@ -1,8 +1,10 @@
 <div class="container">
   <h1>Poll for <%=@ballot.poll.group.name%></h1>
   <h3>Resident Member Ballot</h3>
+  <strong>MemberNumber: <%=@ballot.member_number%></strong><br/>
   <strong>SCA Name: <%=@ballot.sca_name%></strong><br/>
-  <strong>Modern Name: <%=@ballot.modern_name%></strong>
+  <strong>Modern Name: <%=@ballot.modern_name%></strong><br/>
+  <strong>Zipcode: <%=@ballot.zipcode%></strong><br/>
   <%= bootstrap_form_with url: ballots_path do |f| %>
     <%= f.hidden_field :sca_name, value: @ballot.sca_name %>
     <%= f.hidden_field :modern_name, value: @ballot.modern_name %>

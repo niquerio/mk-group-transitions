@@ -15,6 +15,9 @@ Poll closes: <%= @poll.end_date.strftime('%A, %b %d, %Y @ %l:%M %p') %>
   To fill out poll
   <%= bootstrap_form_with url: new_ballot_path do |f| %>
     <%= f.text_field :member_number %>
+    <%= f.text_field :sca_name %>
+    <%= f.text_field :modern_name %>
+    <%= f.text_field :zipcode %>
     <%= f.hidden_field :poll_id, :value => @poll.id %>
     <%= f.submit "Get Ballot" %>
   <% end %>

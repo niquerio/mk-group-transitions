@@ -13,8 +13,15 @@ RSpec.feature "person submits member number" do
 
     visit poll_path(poll.id)
     fill_in "member_number", with: member.number
+		fill_in "sca_name", with: member.sca_name
+		fill_in "modern_name", with: member.modern_name
+		fill_in "zipcode", with: member.zipcode
+
     click_on "Get Ballot"
     expect(page).to have_text member.sca_name
+    expect(page).to have_text member.modern_name
+    expect(page).to have_text member.zipcode
+    expect(page).to have_text member.number
     expect(page).to have_text "Resident Member Ballot"
     expect(page).to have_text candidate.sca_name
     expect(page).to have_text candidate1.sca_name
@@ -33,6 +40,9 @@ RSpec.feature "person submits member number" do
 
     visit poll_path(poll.id)
     fill_in "member_number", with: member.number
+		fill_in "sca_name", with: member.sca_name
+		fill_in "modern_name", with: member.modern_name
+		fill_in "zipcode", with: member.zipcode
     click_on "Get Ballot"
 
     choose "scores_attributes[0][value]_3"
@@ -47,8 +57,12 @@ RSpec.feature "person submits member number" do
     expect(ballot.sca_name).to eq(member.sca_name)
     expect(ballot.modern_name).to eq(member.modern_name)
     expect(ballot.member_number).to eq(member.number)
+    expect(ballot.zipcode).to eq(member.zipcode.number)
     expect(ballot.comment).to eq(comment)
     expect(ballot.scores.find_by(candidate_id: candidate.id).value).to eq(3)
     expect(ballot.scores.find_by(candidate_id: candidate1.id).value).to eq(2)
+		expect(page).to have_current_path('/')
+    expect(page).to have_content('Middle Kingdom Group Transition')
+    expect(page).to have_content('Your ballot has been successfully submitted')
   end 
 end

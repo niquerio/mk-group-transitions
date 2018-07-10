@@ -3,7 +3,7 @@
   <h3>Current Groups with Polls</h3>
   <ul>
     <% @polls.each do |p| %>
-    <li><%=p.group.name%></li>
+    <li><%=link_to p.group.name, poll_path(p.id)%></li>
     <% end %>
   </ul>
 </div>

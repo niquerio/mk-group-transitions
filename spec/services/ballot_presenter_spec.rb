@@ -27,18 +27,15 @@ describe BallotPresenter, 'behavior' do
     it 'has empty string comment' do
       expect(@bp.comment).to eq('')      
     end
-    it 'resident_member is false' do
-      expect(@bp.resident_member).to be_falsy     
-    end
   end
-  context 'valid member_number with matching zipcode' do
+  context 'valid member info with matching zipcode' do
     before(:each) do
       group = create(:group, name: 'Barony of Nowhere')
       z = create(:zipcode)
       group.zipcodes << z
       poll = create(:current_poll, group: group)
       @member = create(:member, sca_name: 'Molly Madrigal', modern_name: 'Tricia Modern', zipcode: z, number: 123456)
-      ballot = Ballot.new(poll: poll, member_number: @member.number)
+      ballot = Ballot.new(poll: poll, member_number: @member.number, sca_name: @member.sca_name, modern_name: @member.modern_name, zipcode: @member.zipcode.number)
       @bp = BallotPresenter.new(ballot)
     end
     it 'has member number' do
@@ -52,9 +49,6 @@ describe BallotPresenter, 'behavior' do
     end
     it 'has empty string comment' do
       expect(@bp.comment).to eq('')      
-    end
-    it 'resident_member is true' do
-      expect(@bp.resident_member).to be_truthy     
     end
   end
 end
