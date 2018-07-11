@@ -6,7 +6,7 @@ Poll closes: <%= @poll.end_date.strftime('%A, %b %d, %Y @ %l:%M %p') %>
     <div class="col text-center">
      <h3><%=ticket.candidates.pluck(:sca_name).to_sentence %></h3> 
      <%= image_tag ticket.portrait.variant(resize: "x300") %><br>
-     <%= link_to "Letter of Intent", ticket_path(ticket.id) %>
+     <%= link_to "Letter of Intent", ticket_path(ticket.id), target: :_blank %>
     </div>
   <% end %>
   </div>
