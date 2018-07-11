@@ -21,6 +21,10 @@ Poll closes: <%= @poll.end_date.strftime('%A, %b %d, %Y @ %l:%M %p') %>
     <%= f.hidden_field :poll_id, :value => @poll.id %>
     <%= f.submit "Get Ballot" %>
   <% end %>
-  <%=link_to "Click for Non-Resident/Non-Member Poll", '#' %>
+  <%= form_with url: new_ballot_path do |f| %>
+    <%= f.hidden_field :poll_id, :value => @poll.id %>
+    <%= f.submit "Click for Non-Resident/Non-Member Poll" %>
+  <% end %>
+    
   </div>
 </div>

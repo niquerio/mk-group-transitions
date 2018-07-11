@@ -19,9 +19,5 @@ describe "get /tickets/:id" do
       expect(response.body).to include(@candidate2.sca_name)
       expect(response.body).to include(@ticket.letter_of_intent)
     end
-    it "has link back to poll" do
-      get "/tickets/#{@ticket.id}"
-      expect(response.body).to include("polls/#{@poll.id}")
-    end
   end
 end

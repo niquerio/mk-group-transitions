@@ -1,11 +1,20 @@
 <div class="container">
   <h1>Poll for <%=@ballot.poll.group.name%></h1>
-  <h3>Resident Member Ballot</h3>
-  <strong>Member Number: <%=@ballot.member_number%></strong><br/>
-  <strong>SCA Name: <%=@ballot.sca_name%></strong><br/>
-  <strong>Modern Name: <%=@ballot.modern_name%></strong><br/>
-  <strong>Zipcode: <%=@ballot.zipcode%></strong><br/>
+  <% if @ballot.resident_member? %>
+    <h3>Resident Member Ballot</h3>
+    <strong>Member Number: <%=@ballot.member_number%></strong><br/>
+    <strong>SCA Name: <%=@ballot.sca_name%></strong><br/>
+    <strong>Modern Name: <%=@ballot.modern_name%></strong><br/>
+    <strong>Zipcode: <%=@ballot.zipcode%></strong><br/>
+	<% else %>
+	  <h3>Non-Resident/Non-Member Ballot</h3>
+	<% end %>
   <%= bootstrap_form_with url: ballots_path do |f| %>
+	  <% if !@ballot.resident_member? %>
+		  <%= f.text_field :sca_name %>
+		  <%= f.text_field :modern_name %>
+		  <%= f.text_field :zipcode %>
+		<% end %>
     <% i = 0 %>
     <% @ballot.tickets.each do |ticket| %>
 			<div class="d-flex flex-row">

@@ -58,6 +58,7 @@ RSpec.feature "person submits member number" do
     expect(ballot.modern_name).to eq(member.modern_name)
     expect(ballot.member_number).to eq(member.number)
     expect(ballot.zipcode).to eq(member.zipcode.number)
+    expect(ballot.resident_member).to eq(true)
     expect(ballot.comment).to eq(comment)
     expect(ballot.scores.find_by(candidate_id: candidate.id).value).to eq(3)
     expect(ballot.scores.find_by(candidate_id: candidate1.id).value).to eq(2)
